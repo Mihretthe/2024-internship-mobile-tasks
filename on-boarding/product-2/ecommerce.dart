@@ -4,6 +4,7 @@ import 'dart:io';
 void main(){
   
   Ecommerce commerce = Ecommerce();
+  try{
   while (true){
   print("*************************Welcome***************************************");
   print("      1. Add New Products");
@@ -46,6 +47,10 @@ void main(){
    if (contt != 1){
       return ;
    }
+   }} on Exception catch(e){
+    print("Due to Invalid Input the Program is Terminated");
+    print(e);
+    
    }
 
   
