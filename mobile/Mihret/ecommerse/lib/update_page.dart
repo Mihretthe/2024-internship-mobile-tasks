@@ -1,18 +1,22 @@
 
+import 'dart:io';
+
+import 'package:ecommerse/data.dart';
+import 'package:ecommerse/home_page.dart';
 import 'package:ecommerse/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class AddProduct extends StatefulWidget {
-  const AddProduct({super.key});
-
+class UpdateProduct extends StatefulWidget {
+  const UpdateProduct({super.key, required this.product});
+  final Product product;
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<UpdateProduct> createState() => _UpdateProductState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _UpdateProductState extends State<UpdateProduct> {
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
   String? name;
@@ -37,35 +41,39 @@ class _AddProductState extends State<AddProduct> {
             },
       child: Container(
         width: 366,
-        height: 160,
-        padding: const EdgeInsets.all(50),
+        height: 200,
         decoration: BoxDecoration(
             color: const Color(0xFFF3F3F3),
             borderRadius: BorderRadius.circular(16)),
-        child: Column(
-          mainAxisAlignment: _image == null
-              ? MainAxisAlignment.spaceEvenly
-              : MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            
-              const Icon(
-                Icons.image_outlined,
-                size: 40,
-              ),
-            
-            (_image == null)
-                ? const Text(
-                    "upload image",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Color(0xFF3E3E3E)),
-                  )
-                : const Text(
-                    "Image Uploaded",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Color(0xFF3E3E3E)),
-                  )
-          ],
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: _image == null
+                ? MainAxisAlignment.spaceEvenly
+                : MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  _image != null? Image.file(File(_image!.path)):
+                  Image.asset( widget.product.image), 
+                  const Positioned(
+                   child: Icon(
+                    Icons.update,
+                    size: 40,),
+                 ),
+                ],
+              )
+                , const Text(
+                      "update image",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Color(0xFF3E3E3E)),
+                    )
+             
+                    
+                  
+                    
+            ],
+          ),
         ),
       ),
     );
@@ -78,7 +86,7 @@ class _AddProductState extends State<AddProduct> {
     return Scaffold(
       appBar: AppBar(
         title: const Align(
-            alignment: Alignment.center, child: Text("Add Product")),
+            alignment: Alignment.center, child: Text("Update")),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
@@ -93,10 +101,10 @@ class _AddProductState extends State<AddProduct> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               banner(),
-               TextFieldCard("name"),
-               TextFieldCard("category"),
-               TextFieldCard("price", dollar: true),
-               TextFieldCard("description", area: true),
+               TextFieldCard("name", text: widget.product.title,),
+               TextFieldCard("category", text: widget.product.subtitle,),
+               TextFieldCard("price", dollar: true, text: widget.product.price),
+               TextFieldCard("description", area: true, text: widget.product.detail,),
               Container(
                 margin: const EdgeInsets.all(6),
                 child: ElevatedButton(
@@ -109,8 +117,8 @@ class _AddProductState extends State<AddProduct> {
                     Navigator.of(context).pop();
                   },
                   child: const Text(
-                    "ADD",
-                    style: TextStyle(color: Color.fromARGB(255, 210, 206, 206)),
+                    "Update",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -129,7 +137,9 @@ class _AddProductState extends State<AddProduct> {
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)))),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                        return const HomePage();
+                      }));
                     },
                     child: const Text("DELETE",
                         style: TextStyle(color: Colors.red))),

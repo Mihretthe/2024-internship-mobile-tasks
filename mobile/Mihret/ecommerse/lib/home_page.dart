@@ -1,9 +1,13 @@
+// import 'dart:ffi';
+
 import 'package:ecommerse/add_page.dart';
-import 'package:ecommerse/detail_page.dart';
+import 'package:ecommerse/data.dart';
+// import 'package:ecommerse/detail_page.dart';
 import 'package:ecommerse/search_page.dart';
 import 'package:ecommerse/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +39,8 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: const BorderRadius.all(Radius.circular(11))),
               child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
                       return const SearchPage();
                     }));
                   },
@@ -84,31 +89,38 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Stack(
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.notifications_outlined,
-                    color: Colors.grey,
-                    size: 30,
-                  )),
-              Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Container(
-                    width: 12,
-                    height: 12,
-                    decoration: const BoxDecoration(
-                        color: Colors.blue, shape: BoxShape.circle),
-                  ))
-            ],
+          Container(
+            width: 45,
+            height: 45,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(11)),
+                border: Border.all(
+                    width: 1, color: const Color.fromARGB(255, 205, 203, 203))),
+            child: Stack(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.notifications_outlined,
+                      color: Colors.grey,
+                      size: 25,
+                    )),
+                Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      width: 12,
+                      height: 12,
+                      decoration: const BoxDecoration(
+                          color: Colors.blue, shape: BoxShape.circle),
+                    ))
+              ],
+            ),
           )
         ],
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -117,54 +129,78 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.only(top: 25),
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                header(),
-                bigTitle("Available Products", Icons.search),
-                const SingleChildScrollView(
+          body: Column(
+            children: [
+              header(),
+              bigTitle("Available Products", Icons.search),
+              Expanded(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                        ProductCard(
+                      ProductCard(
+                        product: Product(
                           image: 'images/image.png',
-                          title: 'Derby Leather Shoes',
+                          detail_image: 'images/image2.png',
+                          title: 'Ikru Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe'),
-                       ProductCard(
+                          subtitle: 'Men’s shoe',
+                          detail:
+                              "A Ikru leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+                        ),
+                      ),
+                      ProductCard(
+                        product: Product(
                           image: 'images/image.png',
-                          title: 'Derby Leather Shoes',
+                          detail_image: 'images/mercy.png',
+                          title: 'Mercy Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe'),
-                       ProductCard(
+                          subtitle: 'Men’s shoe',
+                          detail:
+                              "A Mercy leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+                        ),
+                      ),
+                      ProductCard(
+                        product: Product(
                           image: 'images/image.png',
-                          title: 'Derby Leather Shoes',
+                          detail_image: 'images/image2.png',
+                          title: 'Yumi Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe'),
-                       ProductCard(
+                          subtitle: 'Men’s shoe',
+                          detail:
+                              "A Yumi's leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+                        ),
+                      ),
+                      ProductCard(
+                        product: Product(
                           image: 'images/image.png',
-                          title: 'Derby Leather Shoes',
+                          title: 'Mahlu Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe'),
+                          subtitle: 'Men’s shoe',
+                          detail:
+                              "A Mahlu leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           floatingActionButton: SizedBox(
-            width: 52,
-            height: 52,
+            width: 60,
+            height: 60,
             child: FloatingActionButton(
               shape: const CircleBorder(),
-              backgroundColor: const Color.fromARGB(255, 16, 85, 142),
+              backgroundColor: const Color(0xFF3F51F3),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return const AddProduct();
                 }));
               },

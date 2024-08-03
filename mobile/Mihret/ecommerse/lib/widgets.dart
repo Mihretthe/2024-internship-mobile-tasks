@@ -1,40 +1,37 @@
 
 
+import 'package:ecommerse/data.dart';
 import 'package:ecommerse/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final title;
-  final image;
-  final price;
-  final subtitle;
-  final rating;
 
-  const ProductCard({super.key,this.title, this.image, this.price, this.rating, this.subtitle});
+  const ProductCard({super.key, required this.product});
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
-            return const DetailPage();
+            return  DetailPage(product:  product);
           }));
         },
         child: Card(
             child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(image),
+            Image.asset(product.image),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title),
-                  Text("\$$price"),
+                  Text(product.title),
+                  Text("\$${product.price.toString()}"),
                 ],
               ),
             ),
@@ -44,7 +41,7 @@ class ProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    subtitle,
+                    product.subtitle,
                     style: const TextStyle(color: Colors.grey),
                   ),
                   Row(
@@ -54,7 +51,7 @@ class ProductCard extends StatelessWidget {
                         color: Colors.yellow,
                       ),
                       Text(
-                        "($rating)",
+                        "(${product.rating.toString()})",
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -74,7 +71,8 @@ class TextFieldCard extends StatelessWidget {
   final dollar;
   final fill;
   final area;
-  const TextFieldCard(this.title, {this.dollar = false, this.area = false, super.key, this.fill = true});
+  final String? text;
+const TextFieldCard(this.title,  {this.text, this.dollar = false, this.area = false, super.key, this.fill = true});
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +82,9 @@ class TextFieldCard extends StatelessWidget {
         Text(title),
         Stack(children: [
           TextField(
+            controller: TextEditingController(text: (text != null)?text:"" ),
+            
+            keyboardType: dollar? TextInputType.number: TextInputType.text,
             maxLines: area ? 4 : 1,
             decoration: InputDecoration(
                 
@@ -99,15 +100,23 @@ class TextFieldCard extends StatelessWidget {
                     borderSide: BorderSide(
                         color: Color.fromARGB(255, 212, 224, 208), width: 2))),
           ),
-          Container(
-            padding: const EdgeInsets.all(20),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Text(dollar ? '\$' : ""),
+          dollar ? Positioned(
+            right: 0,
+            
+            child: Container(
+              margin: const EdgeInsets.only(left:5, right: 5, bottom: 5, top: 5),
+              color: const Color(0xFFF3F3F3),
+              padding: const EdgeInsets.all(15),
+              child: const Align(
+                alignment: Alignment.bottomRight,
+                child:  Text('\$'),
+              ),
             ),
-          )
+          ):Container(),
         ])
       ],
-    );;
+    );
   }
 }
+
+
