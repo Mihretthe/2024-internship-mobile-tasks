@@ -143,10 +143,22 @@ class _HomePageState extends State<HomePage> {
                         product: Product(
                           image: 'images/image.png',
                           detail_image: 'images/image2.png',
+                          title: 'Redu Shoes',
+                          price: '120',
+                          rating: 4.0,
+                          subtitle: 'Women shoe',
+                          detail:
+                              "A Redusus leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+                        ),
+                      ),
+                      ProductCard(
+                        product: Product(
+                          image: 'images/image.png',
+                          detail_image: 'images/image2.png',
                           title: 'Ikru Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe',
+                          subtitle: 'Women shoe',
                           detail:
                               "A Ikru leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
                         ),
@@ -158,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                           title: 'Mercy Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe',
+                          subtitle: 'Women shoe',
                           detail:
                               "A Mercy leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
                         ),
@@ -170,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                           title: 'Yumi Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe',
+                          subtitle: 'Women shoe',
                           detail:
                               "A Yumi's leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
                         ),
@@ -181,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                           title: 'Mahlu Shoes',
                           price: '120',
                           rating: 4.0,
-                          subtitle: 'Men’s shoe',
+                          subtitle: 'Women shoe',
                           detail:
                               "A Mahlu leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
                         ),

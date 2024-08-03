@@ -55,7 +55,7 @@ class _UpdateProductState extends State<UpdateProduct> {
               Stack(
                 children: [
                   _image != null? Image.file(File(_image!.path)):
-                  Image.asset( widget.product.image), 
+                  Image.asset( widget.product.image, fit: BoxFit.cover,), 
                   const Positioned(
                    child: Icon(
                     Icons.update,
