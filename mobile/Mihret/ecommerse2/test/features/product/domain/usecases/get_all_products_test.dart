@@ -5,7 +5,7 @@ import 'package:ecommerse2/features/product/domain/usecase/get_all_product.dart'
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetAllProductUseCase getAllProductUseCase;
@@ -23,14 +23,14 @@ void main() {
         category: 'Shoe',
         description: 'A great Shoe',
         image: 'The Nike',
-        price: 99.0),
+        price: 99),
     const Product(
         id : '2',
         name: 'Puma',
         category: 'Shoe',
         description: 'The best Shoe',
         image: 'The Puma',
-        price: 999.0),
+        price: 999),
   ];
 
   test('should get all the product listed', () async {

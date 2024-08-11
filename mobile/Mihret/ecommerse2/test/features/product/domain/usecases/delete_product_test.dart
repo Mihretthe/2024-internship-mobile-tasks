@@ -6,7 +6,7 @@ import 'package:ecommerse2/features/product/domain/usecase/delete_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main(){
 
@@ -19,7 +19,7 @@ void main(){
   });
 
   String id = '1';
-  Product product = const Product(id: '1', name: 'Nike', category: 'Shoe', description: 'A great Shoe', image: 'The Nike', price: 99.0);
+  Product product = const Product(id: '1', name: 'Nike', category: 'Shoe', description: 'A great Shoe', image: 'The Nike', price: 99);
 
   test('Deleted Successfully', () async{
 
