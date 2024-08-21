@@ -12,15 +12,16 @@ import '../data_sources/remote_data_source.dart';
 
 
 class ProductRepositoryImpl extends ProductRepository{
-  final NetworkInfoImpl networkInfo;
+  final NetworkInfo networkInfo;
   final LocalDataSource localDataSource;
   final ProductRemoteDataSource productRemoteDataSource;
+  
   ProductRepositoryImpl(this.productRemoteDataSource, this.localDataSource, this.networkInfo);
 
   @override
   Future<Either<Failure, void>> addProduct(Product product) async {
     try{
-
+ 
       return Right(await productRemoteDataSource.addProduct(product.toModel()));
 
     }on ServerException {
@@ -72,7 +73,6 @@ class ProductRepositoryImpl extends ProductRepository{
   @override
   Future<Either<Failure, Product>> updateProduct({required String id, required String name, required int price, required String description}) async {
    try{
-
     return Right(await productRemoteDataSource.updateProduct(id: id, name: name, price: price, description: description));
 
    }on ServerException {

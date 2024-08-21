@@ -1,7 +1,8 @@
 import 'dart:convert';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 
 import '../../../../core/constants/constants.dart';
@@ -27,16 +28,19 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<List<ProductModel>> getAllProduct() async {
+    print("getting here");
+    
     final response = await client.get(Uri.parse(Urls.baseUrl));
-
+    
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body) as Map<String, dynamic>;
-
+      
       List<ProductModel> products = [];
       for (var data in jsonData['data']) {
         products.add(ProductModel.fromJson(data));
       }
-
+      
+print(response.statusCode);
       return products;
     } else {
       throw ServerException();
@@ -74,21 +78,29 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       required int price,
       required String description}) async {
     final response = await client.put(Uri.parse('${Urls.baseUrl}/$id'),
-        headers: null,
+        headers: {
+      'Content-Type': 'application/json',
+    },
         body: json.encode(
             {'name': name, 'description': description, 'price': price}));
 
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body) as Map<String, dynamic>;
-      final productData = jsonData['data'];
-      return ProductModel.fromJson(productData);
-    } else {
-      throw ServerException();
-    }
+
+  if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body) as Map<String, dynamic>;
+    final productData = jsonData['data'];
+    return ProductModel.fromJson(productData);
+  } else if (response.statusCode == 404) {
+    throw Exception('Product with ID $id not found');
+  } else {
+    throw ServerException();
+  }
   }
 
   @override
   Future<void> addProduct(ProductModel productModel) async {
+    // ByteData byteData = await rootBundle.load(productModel.image);
+    // List<int> imageBytes = byteData.buffer.asUint8List();
+
 
     var request = http.MultipartRequest('POST', Uri.parse(Urls.baseUrl));
     request.fields.addAll({
@@ -98,11 +110,13 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     }
     );
     
-    request.files.add(await http.MultipartFile.fromPath('image', productModel.image));
+    request.files.add(await http.MultipartFile.fromPath('image', productModel.image, contentType: MediaType('image', 'jpeg')),  );
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode != 200){
+    if (response.statusCode != 201){
+      
         throw ServerException();
     }
+    // print("mihret $response");
   }
 }
